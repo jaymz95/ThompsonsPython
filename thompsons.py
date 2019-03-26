@@ -38,10 +38,11 @@ def shunt(infix):
     while stack:
         pofix  = pofix + stack[-1]
         stack = stack[:-1]
-
+    
+    # Return postfix regex
     return pofix
 
-print(shunt("(a.b)|(c*.d)"))
+# print(shunt("(a.b)|(c*.d)"))
 
 # Represents a state with two arrows labelles by label
 # Use None for a label represenring "e" arrows
@@ -60,6 +61,8 @@ class nfa:
         self.accept = accept 
 
 def compile(profix):
+    """Compiles a postfix regular expression into a NFA"""
+
     nfastack = []
 
     for c in profix:
@@ -120,5 +123,41 @@ def compile(profix):
     # nfastack should only have a single nfa on it at this point
     return nfastack.pop()
 
-print(compile("ab.cd.|"))
-print(compile("aa.*"))
+# print(compile("ab.cd.|"))
+# print(compile("aa.*"))
+
+
+def followes(state):
+    """Return the set of states that can be reached from state folllowing e arrows"""
+    # Create a new se, with state as its only member
+    states = set()
+    set.add(state)
+
+    # Check id state has arrows labelled e from it
+    if state.label is None:
+        # if theres an edge1, follow it
+        states |= followes(state.edge1)
+        # If there's an edge2, follow it
+        states |= followes(state.edge2)
+
+
+def match(infix, string):
+    """Matches string to infix regular expression"""
+    # shunt and compile the regular expression
+    postfix = shunt(infix)
+    nfa = compile(postfix)
+
+    # the current set of states and the next set of states
+    current = set()
+    nexts = set()
+
+    # loop through set of character in the string
+    for s in string:
+
+# A few tests
+infixes = ["a.b.c*", "a.(b|d).c*", "(a.(b|d))*", "a.(b.b)*.c"]
+strings = ["", "abc", "abbc", "abcc", "abad", "abbbc"]
+
+for i in infixes:
+    for s in strings:
+        print(match(i, s), i, s)
