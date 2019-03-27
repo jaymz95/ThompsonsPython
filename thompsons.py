@@ -108,6 +108,22 @@ def compile(profix):
             # Push new NFA to the stack
             newnfa = nfa(initial, accept)
             nfastack.append(newnfa)
+        elif c == '+':
+            # Pop a single NFA from the stack
+            nfa1 = nfastack.pop()
+            # Creat new initial and accept states
+            initial = state()
+            accept = state()
+            # Join the new initial state to nfa1's initial state 
+            initial.edge1 = nfa1.initial
+            #initial.edge2 = accept
+            # Join the old accept state to the new accept
+            # state and nfa1's initial state
+            nfa1.accept.edge1 = nfa1.initial
+            nfa1.accept.edge2 = accept
+            # Push new NFA to the stack
+            newnfa = nfa(initial, accept)
+            nfastack.append(newnfa)
         else: 
             # Create new initial and accept states
             accept  = state()
@@ -129,11 +145,11 @@ def compile(profix):
 
 def followes(state):
     """Return the set of states that can be reached from state following e arrows"""
-    # Create a new se, with state as its only member
+    # Create a new set, with state as its only member
     states = set()
     states.add(state)
 
-    # Check id state has arrows labelled e from it
+    # Check if state has arrows labelled e from it
     if state.label is None:
         # Check if edge1 is a state
         if state.edge1 is not None:
@@ -177,7 +193,7 @@ def match(infix, string):
     return (nfa.accept in current)
 
 # A few tests
-infixes = ["a.b.c*", "a.(b|d).c*", "(a.(b|d))*", "a.(b.b)*.c"]
+infixes = ["a.b.c+", "a.(b|d).c+", "(a.(b|d))*", "a.(b.b)*.c"]
 strings = ["", "abc", "abbc", "abcc", "abad", "abbbc"]
 
 for i in infixes:
