@@ -6,7 +6,7 @@ def shunt(infix):
     to postfix."""
 
     # special characters for regular expressions and their precidence
-    specials = {'*': 50, '.': 40, '|': 30}
+    specials = {'?': 50,'+': 50,'*': 50, '.': 40, '|': 30}
 
     # will eventually be the output
     pofix = ""
