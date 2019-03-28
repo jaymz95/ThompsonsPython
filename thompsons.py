@@ -116,11 +116,25 @@ def compile(profix):
             accept = state()
             # Join the new initial state to nfa1's initial state 
             initial.edge1 = nfa1.initial
-            #initial.edge2 = accept
             # Join the old accept state to the new accept
             # state and nfa1's initial state
             nfa1.accept.edge1 = nfa1.initial
             nfa1.accept.edge2 = accept
+            # Push new NFA to the stack
+            newnfa = nfa(initial, accept)
+            nfastack.append(newnfa)
+        elif c == '?':
+            # Pop a single NFA from the stack
+            nfa1 = nfastack.pop()
+            # Creat new initial and accept states
+            initial = state()
+            accept = state()
+            # Join the new initial state to nfa1's initial state 
+            initial.edge1 = nfa1.initial
+            initial.edge2 = accept
+            # Join the old accept state to the new accept
+            # state and nfa1's initial state
+            nfa1.accept.edge1 = accept
             # Push new NFA to the stack
             newnfa = nfa(initial, accept)
             nfastack.append(newnfa)
@@ -193,8 +207,8 @@ def match(infix, string):
     return (nfa.accept in current)
 
 # A few tests
-infixes = ["a.b.c+", "a.(b|d).c+", "(a.(b|d))*", "a.(b.b)*.c"]
-strings = ["", "abc", "abbc", "abcc", "abad", "abbbc"]
+infixes = ["a.b?","a.b.c?", "a.(b|d).c?", "(a.(b|d))*", "a.(b.b)*.c"]
+strings = ["ab", "abc", "abbc", "abcc", "abad", "abbbc"]
 
 for i in infixes:
     for s in strings:
