@@ -132,8 +132,7 @@ def compile(profix):
             # Join the new initial state to nfa1's initial state 
             initial.edge1 = nfa1.initial
             initial.edge2 = accept
-            # Join the old accept state to the new accept
-            # state and nfa1's initial state
+            # Join the old accept state to the new accept state
             nfa1.accept.edge1 = accept
             # Push new NFA to the stack
             newnfa = nfa(initial, accept)
