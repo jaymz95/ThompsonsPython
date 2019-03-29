@@ -1,9 +1,8 @@
 # Matching Regular Expressions with Strings using Thompsons Construction and Shunting Yard Algorithm
 # James Mullarkey
 
-# Importing function from another python file
+# Importing functions from other python files
 from shunt import shunt
-# Importing function from another python file
 from thompsons import compile
 
 def followes(state):
@@ -14,14 +13,10 @@ def followes(state):
 
     # Check if state has arrows labelled e from it
     if state.label is None:
-        # Check if edge1 is a state
-        if state.edge1 is not None:
-            # if theres an edge1, follow it
-            states |= followes(state.edge1)
-        # Check if edge2 is a state 
-        if state.edge2 is not None:
-            # If there's an edge2, follow it
-            states |= followes(state.edge2)
+        if state.edge1 is not None: # Check if edge1 is a state
+            states |= followes(state.edge1) # if theres an edge1, follow it
+        if state.edge2 is not None: # Check if edge2 is a state 
+            states |= followes(state.edge2) # If there's an edge2, follow it
     
     # Return the set of states
     return states
@@ -41,12 +36,9 @@ def match(infix, string):
 
     # loop through set of character in the string
     for s in string:
-        # Loop through the current set of states
-        for c in current:
-            # Check if that state is labelled s
-            if c.label == s:
-                # Add the edge1 state to the next set
-                next |= followes(c.edge1)
+        for c in current: # Loop through the current set of states
+            if c.label == s: # Check if that state is labelled s
+                next |= followes(c.edge1) # Add the edge1 state to the next set
         # Set current to next, and clear out next
         current = next
         next  = set()
@@ -67,7 +59,6 @@ if option == test:
     for i in infixes:
         for s in strings:
          print(match(i, s), i, s)
-
 elif option == userInput:
     infix = input("Please enter an infix Regular Expression: ")
     stri = input("Please enter a String to test your Regular Expression: ")

@@ -3,24 +3,18 @@
 # http://www.oxfordmathcenter.com/drupal7/node/628
 
 def shunt(infix):
-    """The Shunting Yard Algorithm for converting infix regular expressions 
-    to postfix."""
-
+    """The Shunting Yard Algorithm for converting infix regular expressions to postfix."""
     # special characters for regular expressions and their precidence
     specials = {'?': 50,'+': 50,'*': 50, '.': 40, '|': 30}
 
-    # will eventually be the output
-    pofix = ""
-    # operator stack
-    stack = ""
+    # pofix will eventually be the output and operator stack
+    pofix, stack = "", ""
 
     # loop throuh the string a character at a time
     for c in infix:
-        # If an open bracket, push to the stack
-        if c== '(':
+        if c== '(': # If an open bracket, push to the stack
             stack = stack + c
-        # If a closing bracket, pop from the stack, push to output until open bracket
-        elif c == ')':
+        elif c == ')': # If a closing bracket, pop from the stack, push to output until open bracket
             while stack[-1] != '(':
                 pofix  = pofix + stack[-1]
                 stack = stack[:-1]
@@ -32,11 +26,9 @@ def shunt(infix):
                 pofix  = pofix + stack[-1]
                 stack = stack[:-1]
             stack = stack + c
-        # Regular characters are pushed immediately to the output
-        else:
+        else: # Regular characters are pushed immediately to the output
             pofix = pofix + c
-    # Pop all remaining operators from the stack to output
-    while stack:
+    while stack: # Pop all remaining operators from the stack to output
         pofix  = pofix + stack[-1]
         stack = stack[:-1]
     
