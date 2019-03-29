@@ -54,10 +54,21 @@ def match(infix, string):
     # Check if the accept state is in the set of current states
     return (nfa.accept in current)
 
-# A few tests
-infixes = ["a.b?","a.b.c?", "a.(b|d).c?", "(a.(b|d))*", "a.(b.b)*.c"]
-strings = ["ab", "abc", "abbc", "abcc", "abad", "abbbc"]
+test, userInput = 1, 2
+option = input("Press 1 to run an array of infix expressions with strings " + 
+"\nPress 2 to enter a Regular Expression and String to test it: ")
 
-for i in infixes:
-    for s in strings:
-        print(match(i, s), i, s)
+# Casting option to an int
+option = int(option)
+if option == test:
+    # A few tests
+    infixes = ["a.b?","a.b.c?", "a.(b|d).c+", "(a.(b|d))*", "a.(b.b)*.c"]
+    strings = ["ab", "abc", "abbc", "abcc", "abad", "abbbc"]
+    for i in infixes:
+        for s in strings:
+         print(match(i, s), i, s)
+
+elif option == userInput:
+    infix = input("Please enter an infix Regular Expression: ")
+    stri = input("Please enter a String to test your Regular Expression: ")
+    print(match(infix, stri), infix, stri)
