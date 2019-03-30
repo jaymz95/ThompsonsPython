@@ -25,7 +25,7 @@ def shunt(infix):
             # checks stack is not null and if the special character in c is lessthan 
             # or equal to the char at the top off the stack
             while stack and specials.get(c, 0) <= specials.get(stack[-1], 0): 
-                # takes char off the stack at puts it on the postix regex
+                # takes char off the stack and puts it on the postfix regex
                 postfix  = postfix + stack[-1]
                 stack = stack[:-1]
             stack = stack + c

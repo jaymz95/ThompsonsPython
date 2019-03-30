@@ -18,6 +18,18 @@ a string to pass through it. If it is True or False will be output to the user.
 
 ## Explaining The Operators in the Code: ##
 
+### Shunting Yard Algorithm code explanation ###
+The Shunting Yard Algorithm is for converting infix regular expressions to postfix.
+An infix expressiona and a string to test it with are parameters for the fucntion. 
+It has a dictionary of special characters for regular expressions and their precidence. 
+A postfix expression will eventually be the output of the function. 
+Loop throuh the string, a character at a time. 
+using an if elif check for brackets and change the expression appropriatly. 
+If the character is an operator, it is put in the correct place in the statement using a while loop checking for precedence. 
+When regular characters are encountered they are pushed immediately onto the postfix expression. 
+Pop all remaining operators from the stack to the postfix expression. 
+Return Postfix Regular Expression. 
+
 __Dot__
 When The "."(dot) character is encountered in an infix Regular Expression it pops 
 the last two NFA's from the stack, NFA2 and NFA1. They are then joined by an 'E' 
