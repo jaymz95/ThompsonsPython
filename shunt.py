@@ -2,7 +2,7 @@
 # Shunting Yard Algorithm
 # http://www.oxfordmathcenter.com/drupal7/node/628
 
-def shunt(infix):
+def toPostfix(infix):
     """The Shunting Yard Algorithm for converting infix regular expressions to postfix."""
     # special characters for regular expressions and their precidence
     specials = {'?': 50,'+': 50,'*': 50, '.': 40, '|': 30} # dictionary

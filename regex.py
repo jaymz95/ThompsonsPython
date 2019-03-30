@@ -2,7 +2,7 @@
 # James Mullarkey
 
 # Importing functions from other python files
-from shunt import shunt
+from shunt import toPostfix
 from thompsons import compile
 
 def followes(state):
@@ -24,12 +24,10 @@ def followes(state):
 def match(infix, string):
     """Matches string to infix regular expression"""
     # shunt and compile the regular expression
-    postfix = shunt(infix)
+    postfix  = toPostfix(infix)
     nfa = compile(postfix)
-
     # the current set of states and the next set of states
-    current = set()
-    next = set()
+    current, next = set(), set()
 
     # Add the initial state to the current set
     current |= followes(nfa.initial)
@@ -40,16 +38,15 @@ def match(infix, string):
             if c.label == s: # Check if that state is labelled s
                 next |= followes(c.edge1) # Add the edge1 state to the next set
         # Set current to next, and clear out next
-        current = next
-        next  = set()
+        current, next = next, set()
 
     # Check if the accept state is in the set of current states
     return (nfa.accept in current)
 
 option, test, userInput = -1, 1, 2
-
+# User input menu
 while option != 0:
-    option = input("Press 1 to run an array of infix expressions with strings " + 
+    option = input("\nPress 1 to run an array of infix expressions with strings " + 
     "\nPress 2 to enter a Regular Expression and String to test it \nPress 0 to Quit: ")
 
     # Casting option to an int

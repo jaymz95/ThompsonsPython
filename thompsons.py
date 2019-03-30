@@ -78,6 +78,8 @@ def compile(postfix):
             nfa1.accept.edge1 = accept
             # Push new NFA to the stack
             nfastack.append(nfa(initial, accept))
+
+        # if its a regular character 
         else: 
             # Create new initial and accept states
             accept, initial  = state(), state()
