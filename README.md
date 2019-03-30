@@ -19,6 +19,7 @@ a string to pass through it. If it is True or False will be output to the user.
 ## Explaining The Operators in the Code: ##
 
 __Dot__
+When The "compile(postfix)"
 ![Imgur](https://i.imgur.com/1CbJa9I.jpg)
 
 __Verticle Bar__

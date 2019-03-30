@@ -14,12 +14,12 @@ class nfa:
         self.initial = initial
         self.accept = accept 
 
-def compile(profix):
+def compile(postfix):
     """Compiles a postfix regular expression into a NFA"""
 
     nfastack = []
 
-    for c in profix:
+    for c in postfix:
         if c == '.':
             # pop two NFA's off the stack
             nfa2, nfa1 = nfastack.pop(), nfastack.pop()
