@@ -23,6 +23,8 @@ def followes(state):
 
 def match(infix, string):
     """Matches string to infix regular expression"""
+    string = string.lower() # case insensitive matching
+    infix = infix.lower()
     # shunt and compile the regular expression
     postfix  = toPostfix(infix)
     nfa = compile(postfix)
