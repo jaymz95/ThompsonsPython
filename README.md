@@ -1,7 +1,5 @@
 # Grapth Theory Project #
 
-"# ThompsonsPython" 
-
 ## User Guide ##
 Command to run Program(Go to the project folder "Thompsons"):
     Python regex.py
@@ -30,6 +28,23 @@ When regular characters are encountered they are pushed immediately onto the pos
 Pop all remaining operators from the stack to the postfix expression. 
 Return Postfix Regular Expression. 
 
+### Matching and following 'E' arrows code explanation ###
+The main fucntion of the "folloes()" function is to Return the set of states that can be 
+reached from state following e arrow and test expression against strings. 
+The followes() function is useed to find all the states where the 'E' arrows point. 
+It check if state has arrows labelled e from it and if there is an edge1, follow it
+and or if there's an edge2, follow it . 
+Return the set of states where the 'E' arrows point.
+
+The 'match()' function matches string to infix regular expression with case insensitive matching. 
+It sends the infix expression to the Shunt.py file and the postfix regex to the Thompsons.py file, 
+which returns an nfa. 
+'match()' then gets the current set of states and the next set of states. 
+Then each character on the string is looped through the expression. 
+If the current set of states is in the accept state of the nfa then it returns "true".
+Input menu with user options 
+
+### Thompsons Algorithm code explanation ###
 __Dot__
 When The "."(dot) character is encountered in an infix Regular Expression it pops 
 the last two NFA's from the stack, NFA2 and NFA1. They are then joined by an 'E' 
